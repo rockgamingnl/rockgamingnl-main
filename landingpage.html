@@ -1,4 +1,1213 @@
-<div class="hero">
-    <img src="rockgaming.jpg" alt="Rock Gaming" style="width: 100%; height: auto;">
-</div>
-<h1>Welcome to Rock Gaming</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rock Gaming NL - Newfoundland & Labrador's first dedicated gaming community hub">
+    <meta name="theme-color" content="#060810">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains">
+    <title>Rock Gaming NL — Built on the Rock. Gaming Everywhere.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #e63946;
+            --gold: #f4c430;
+            --blue: #1d3557;
+            --light-blue: #457b9d;
+            --white: #f1faee;
+            --dark: #0a0e1a;
+            --darker: #060810;
+            --card: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--darker);
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* NOISE OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' result='noise'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23000' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(6, 8, 16, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(230, 57, 70, 0.2);
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            color: var(--white);
+        }
+
+        .nav-logo span {
+            color: var(--red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        /* HAMBURGER MENU */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger-menu.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger-menu.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(230, 57, 70, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(69, 123, 157, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(29, 53, 87, 0.3) 0%, transparent 60%),
+                var(--darker);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(230, 57, 70, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(230, 57, 70, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(60px); }
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            max-width: 700px;
+            animation: fadeUp 1s ease forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-logo {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            display: block;
+        }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            color: rgba(241, 250, 238, 0.7);
+            letter-spacing: 1px;
+        }
+
+        .hero-sub strong {
+            color: var(--gold);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--red);
+            color: white;
+            padding: 1rem 2.5rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            background: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 2px solid rgba(241, 250, 238, 0.3);
+            clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+            transition: all 0.2s;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            background: var(--red);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--red);
+            border-left: 3px solid var(--red);
+            padding-left: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            letter-spacing: 3px;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title span {
+            color: var(--red);
+        }
+
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: rgba(241, 250, 238, 0.75);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .about-text p strong {
+            color: var(--gold);
+        }
+
+        .about-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .about-card {
+            background: var(--card);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--red);
+        }
+
+        .about-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--red);
+        }
+
+        .about-card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-card h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+        }
+
+        .about-card p {
+            font-size: 0.85rem;
+            color: rgba(241, 250, 238, 0.6);
+            line-height: 1.5;
+        }
+
+        /* STREAMER PROGRAM */
+        .streamer-section {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.08) 0%, rgba(29, 53, 87, 0.2) 100%);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+            margin: 0 -2rem;
+        }
+
+        .streamer-section::before {
+            content: 'STREAM';
+            position: absolute;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12rem;
+            color: rgba(230, 57, 70, 0.04);
+            pointer-events: none;
+            letter-spacing: 10px;
+        }
+
+        .streamer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .perks-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .perks-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--red);
+        }
+
+        .perk-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .perk-text h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.2rem;
+        }
+
+        .perk-text p {
+            font-size: 0.85rem;
+            color: rgba(241, 250, 238, 0.6);
+        }
+
+        /* PHASES */
+        .phases {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .phase {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .phase-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--red);
+            line-height: 1;
+            flex-shrink: 0;
+            width: 3rem;
+            opacity: 0.5;
+        }
+
+        .phase-content h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .phase-content p {
+            font-size: 0.9rem;
+            color: rgba(241, 250, 238, 0.6);
+            line-height: 1.6;
+        }
+
+        /* PLATFORMS */
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .platform-card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 44px;
+            justify-content: center;
+        }
+
+        .platform-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--red);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .platform-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .platform-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(230, 57, 70, 0.3);
+            background: rgba(17, 24, 39, 0.9);
+        }
+
+        .platform-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .platform-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .platform-handle {
+            font-size: 0.8rem;
+            color: rgba(241, 250, 238, 0.5);
+        }
+
+        /* COMMUNITY */
+        .community-section {
+            text-align: center;
+        }
+
+        .community-section .section-title {
+            margin-bottom: 1rem;
+        }
+
+        .community-desc {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: rgba(241, 250, 238, 0.7);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .community-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            text-align: left;
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(230, 57, 70, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .feature-emoji {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: rgba(241, 250, 238, 0.6);
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--red);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: 'JOIN';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20rem;
+            color: rgba(0, 0, 0, 0.1);
+            pointer-events: none;
+            white-space: nowrap;
+            letter-spacing: 20px;
+        }
+
+        .cta-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            letter-spacing: 4px;
+            line-height: 1;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--red);
+            padding: 1rem 2.5rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+            transition: all 0.2s;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-dark {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 1rem 2.5rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+            transition: all 0.2s;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .btn-dark:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--darker);
+            border-top: 1px solid rgba(230, 57, 70, 0.2);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--red);
+        }
+
+        .footer-tagline {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(241, 250, 238, 0.4);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(241, 250, 238, 0.5);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--red);
+        }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: rgba(241, 250, 238, 0.25);
+            letter-spacing: 1px;
+        }
+
+        /* DIVIDER */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(230, 57, 70, 0.3), transparent);
+            margin: 0;
+        }
+
+        /* FORM STYLES */
+        .form-container {
+            background: var(--card);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--red);
+            box-shadow: 0 0 10px rgba(230, 57, 70, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group button {
+            width: 100%;
+            background: var(--red);
+            color: white;
+            padding: 1rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-height: 44px;
+        }
+
+        .form-group button:hover {
+            background: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.5);
+        }
+
+        .form-message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            color: #28a745;
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            display: block;
+        }
+
+        /* SCROLL ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .streamer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-cards { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hamburger-menu { display: flex; }
+            .nav-links.active { 
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(6, 8, 16, 0.98);
+                padding: 2rem;
+                gap: 1rem;
+            }
+            .streamer-section { padding: 3rem 1.5rem; margin: 0 -1rem; }
+            section { padding: 4rem 1.5rem; }
+            nav { padding: 1rem; }
+            .nav-logo { font-size: 1.3rem; }
+            .hero { padding: 8rem 1rem 4rem; }
+            .cta-section::before { font-size: 8rem; }
+            .streamer-section::before { font-size: 8rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-btns { flex-direction: column; }
+            .btn-primary, .btn-secondary, .btn-white, .btn-dark {
+                width: 100%;
+            }
+            .stats-bar { gap: 2rem; }
+            .about-cards { grid-template-columns: 1fr; }
+            .platforms-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">ROCK<span>GAMING</span>NL</div>
+        <div class="hamburger-menu" id="hamburger">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#streamers">Streamers</a></li>
+            <li><a href="#community">Community</a></li>
+            <li><a href="#platforms">Find Us</a></li>
+            <li><a href="https://discord.gg/EgkJRwSbWs" target="_blank">Join Discord</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <img src="rockgaming.jpg" alt="Rock Gaming NL" class="hero-logo">
+            <p class="hero-sub">
+                <strong>Built on the Rock. Gaming Everywhere.</strong><br>
+                NL's first dedicated gaming community hub — connecting players, showcasing streamers, and putting the province on the map.
+            </p>
+            <div class="hero-btns">
+                <a href="https://discord.gg/EgkJRwSbWs" target="_blank" class="btn-primary">Join Discord</a>
+                <a href="#streamers" class="btn-secondary">Streamer Program</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Discord Members</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">150+</div>
+            <div class="stat-label">Facebook Followers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Platforms</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">18+</div>
+            <div class="stat-label">Community</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">1</div>
+            <div class="stat-label">Week Old 🔥</div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="about-grid reveal">
+            <div class="about-text">
+                <span class="section-tag">About Us</span>
+                <h2 class="section-title">Who We <span>Are</span></h2>
+                <p>Rock Gaming NL is <strong>Newfoundland & Labrador's first dedicated gaming community hub</strong>. We're built by gamers, for gamers.</p>
+                <p>Our mission is to connect players across the province, showcase local streaming talent, and put NL on the competitive gaming map. Whether you're a casual player, aspiring streamer, or esports enthusiast, you've got a home here on the Rock.</p>
+            </div>
+            <div class="about-cards">
+                <div class="about-card">
+                    <div class="about-card-icon">🎮</div>
+                    <h4>Gaming Focused</h4>
+                    <p>Community built around gaming and esports culture</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-icon">🎯</div>
+                    <h4>Streamer Support</h4>
+                    <p>Platform for local content creators to grow</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-icon">🏆</div>
+                    <h4>Competitive</h4>
+                    <p>Esports tournaments and competitive events</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-icon">🌍</div>
+                    <h4>Community</h4>
+                    <p>Connect with gamers across Newfoundland & Labrador</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMER PROGRAM -->
+    <section id="streamers">
+        <div class="streamer-section reveal">
+            <div class="streamer-grid">
+                <div>
+                    <span class="section-tag">Opportunities</span>
+                    <h2 class="section-title">Streamer <span>Program</span></h2>
+                    <p style="color: rgba(241, 250, 238, 0.7); margin-bottom: 2rem; font-size: 1.05rem;">Are you streaming? Want to grow? We've got a program for that. Join Rock Gaming's streamer network and get exposure, support, and community.</p>
+                    <ul class="perks-list">
+                        <li>
+                            <span class="perk-icon">🎤</span>
+                            <div class="perk-text">
+                                <h4>Featured Streams</h4>
+                                <p>Get promoted across our platforms</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="perk-icon">📈</span>
+                            <div class="perk-text">
+                                <h4>Growth Support</h4>
+                                <p>Resources and guidance to expand your audience</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="perk-icon">🤝</span>
+                            <div class="perk-text">
+                                <h4>Network</h4>
+                                <p>Connect with other NL content creators</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="perk-icon">🏅</span>
+                            <div class="perk-text">
+                                <h4>Recognition</h4>
+                                <p>Become part of the Rock Gaming story</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--gold); font-size: 1.5rem; margin-bottom: 1.5rem; font-family: 'Barlow Condensed', sans-serif; letter-spacing: 2px;">How It Works</h3>
+                    <div class="phases">
+                        <div class="phase">
+                            <div class="phase-num">01</div>
+                            <div class="phase-content">
+                                <h4>Apply</h4>
+                                <p>Submit your application to join the program. We're looking for passionate streamers committed to the NL gaming community.</p>
+                            </div>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-num">02</div>
+                            <div class="phase-content">
+                                <h4>Get Verified</h4>
+                                <p>We verify your streaming activity and community engagement. No hidden requirements — just show us you're serious about gaming.</p>
+                            </div>
+                        </div>
+                        <div class="phase">
+                            <div class="phase-num">03</div>
+                            <div class="phase-content">
+                                <h4>Go Live</h4>
+                                <p>Join the network, get featured, and grow alongside the Rock Gaming community. Access exclusive events and promotional opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLATFORMS -->
+    <section id="platforms">
+        <span class="section-tag">Find Us</span>
+        <h2 class="section-title">Where To <span>Find</span> Us</h2>
+        <div class="platforms-grid">
+            <a href="https://discord.gg/EgkJRwSbWs" target="_blank" class="platform-card">
+                <span class="platform-icon">💬</span>
+                <span class="platform-name">Discord</span>
+                <span class="platform-handle">rock-gaming-nl</span>
+            </a>
+            <a href="https://www.twitch.tv/rockgamingnl" target="_blank" class="platform-card">
+                <span class="platform-icon">📺</span>
+                <span class="platform-name">Twitch</span>
+                <span class="platform-handle">rockgamingnl</span>
+            </a>
+            <a href="https://www.youtube.com/@rockgamingnl" target="_blank" class="platform-card">
+                <span class="platform-icon">🎬</span>
+                <span class="platform-name">YouTube</span>
+                <span class="platform-handle">@rockgamingnl</span>
+            </a>
+            <a href="https://www.tiktok.com/@rockgamingnl" target="_blank" class="platform-card">
+                <span class="platform-icon">🎵</span>
+                <span class="platform-name">TikTok</span>
+                <span class="platform-handle">@rockgamingnl</span>
+            </a>
+            <a href="https://www.instagram.com/rockgamingnl" target="_blank" class="platform-card">
+                <span class="platform-icon">📸</span>
+                <span class="platform-name">Instagram</span>
+                <span class="platform-handle">@rockgamingnl</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section id="community" class="community-section">
+        <span class="section-tag">Join In</span>
+        <h2 class="section-title">Why Join Rock <span>Gaming</span></h2>
+        <p class="community-desc">
+            We're more than a community — we're a movement. Rock Gaming NL is the place where NL gamers connect, compete, and grow together.
+        </p>
+        <div class="community-features">
+            <div class="feature-card">
+                <span class="feature-emoji">🎮</span>
+                <h4>Active Gaming Community</h4>
+                <p>Participate in tournaments, game nights, and competitive events with fellow NL gamers.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">🎪</span>
+                <h4>Events & Tournaments</h4>
+                <p>Regular gaming tournaments, community events, and watch parties featuring local and esports content.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">🤖</span>
+                <h4>Gaming Tech Support</h4>
+                <p>Get advice on gaming setups, streaming equipment, and competitive gameplay from experienced members.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">💡</span>
+                <h4>Industry Connections</h4>
+                <p>Network with gaming professionals, streamers, and esports organizations across NL.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">🏆</span>
+                <h4>Recognition Program</h4>
+                <p>Get recognized for your contributions to the community through our achievement system.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-emoji">🌐</span>
+                <h4>Global Reach, Local Focus</h4>
+                <p>Connect with the global gaming community while staying rooted in NL's gaming culture.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to Game?</h2>
+        <p>Join thousands of NL gamers in the Rock Gaming community. Let's build something legendary.</p>
+        <div class="cta-btns">
+            <a href="https://discord.gg/EgkJRwSbWs" target="_blank" class="btn-white">Join Discord Now</a>
+            <a href="#streamers" class="btn-dark">Become a Streamer</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">ROCK<span>GAMING</span>NL</div>
+        <p class="footer-tagline">Built on the Rock. Gaming Everywhere.</p>
+        <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#streamers">Streamers</a>
+            <a href="#community">Community</a>
+            <a href="#platforms">Find Us</a>
+            <a href="https://discord.gg/EgkJRwSbWs" target="_blank">Join Discord</a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Rock Gaming NL. Built by gamers, for gamers. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+
+        function reveal() {
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial call
+    </script>
+
+</body>
+</html>
